@@ -198,15 +198,14 @@ def _sanitize_args(args: List[str]) -> List[str]:
     return clean
 
 
-def run(indir: Directory, outdir: Directory, max_score: int, args: List[str]) -> None:
+def run(indir: Path, outdir: Directory, max_score: int, args: List[str]) -> None:
     """
     Run the tests for the given exercise and produce a results.json.
     """
     test_files = []
 
-    indir_path = Path(indir)
-    if indir_path.is_file():
-        test_files.append(indir_path)
+    if indir.is_file():
+        test_files.append(indir)
     else:
         for root, dirs, files in os.walk(indir):
             for file in files:

@@ -35,3 +35,16 @@ def directory(string: str) -> Directory:
         msg = os.strerror(err)
         raise PermissionError(err, f"{msg}: {string!r}")
     return Directory(path)
+
+def directory_or_file(string: str) -> Path:
+    """
+    Check if the given arg is a readable / writeable directory.
+    """
+    path = Path(string)
+    if not os.access(path, os.R_OK | os.W_OK):
+        err = errno.EACCES
+        msg = os.strerror(err)
+        raise PermissionError(err, f"{msg}: {string!r}")
+    return path
+
+

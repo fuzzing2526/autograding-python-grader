@@ -4,6 +4,7 @@ CLI for the test runner for the Python track on Exercism.io.
 ./bin/run.sh two_fer ~/solution-238382y7sds7fsadfasj23j/ ~/solution-238382y7sds7fsadfasj23j/output/
 """
 from argparse import ArgumentParser, ArgumentTypeError, REMAINDER
+from pathlib import Path
 
 import runner
 import runner.utils
@@ -15,6 +16,11 @@ def _directory(arg):
     except (FileNotFoundError, PermissionError) as err:
         raise ArgumentTypeError(str(err))
 
+def _directory_or_file(arg) -> Path:
+    try:
+        return runner.utils.directory_or_file(arg)
+    except (FileNotFoundError, PermissionError) as err:
+        raise ArgumentTypeError(str(err))
 
 def main():
     """
@@ -25,7 +31,7 @@ def main():
     parser.add_argument(
         "input",
         metavar="IN",
-        type=_directory,
+        type=_directory_or_file,
         help="directory where the [EXERCISE.py] file is located",
     )
 
