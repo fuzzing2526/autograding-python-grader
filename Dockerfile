@@ -15,6 +15,6 @@ COPY . /opt/test-runner
 
 WORKDIR /opt/test-runner
 
-RUN chmod +x /entrypoint.sh
+RUN chmod +x /opt/test-runner/entrypoint.sh
 
-ENTRYPOINT [ "/entrypoint.sh" ]
+ENTRYPOINT [ "/opt/test-runner/entrypoint.sh" ]
