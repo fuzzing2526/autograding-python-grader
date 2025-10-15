@@ -1,8 +1,4 @@
-FROM python:3.11.2-slim
-
-COPY requirements.txt /requirements.txt
-
-RUN pip install -r /requirements.txt
+FROM python:3.12.12-slim
 
 RUN apt-get update \
  && apt-get install jq -y \
@@ -10,6 +6,10 @@ RUN apt-get update \
  && apt-get install coreutils -y \
  && apt-get -q install -y graphviz graphviz-dev cmake pkg-config libcairo2-dev \
  && rm -rf /var/lib/apt/lists/*
+
+COPY requirements.txt /requirements.txt
+
+RUN pip install -r /requirements.txt
 
 COPY . /opt/test-runner
 
