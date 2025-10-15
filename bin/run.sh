@@ -14,6 +14,10 @@ while [ $# -gt 0 ]; do
       MAX_SCORE="${1#*=}"
       MAX_SCORE="${MAX_SCORE:-0}"
       ;;
+    --test-dir=*)
+      TEST_DIR="${1#*=}"
+      TEST_DIR="${TEST_DIR:-./}"
+      ;;
     --setup-command=*)
       SETUP_COMMAND="${1#*=}"
       ;;
@@ -34,7 +38,7 @@ if [ -n "$SETUP_COMMAND" ]; then
   eval "$SETUP_COMMAND"
 fi
 
-timeout "$TIMEOUT" python3 /opt/test-runner/bin/run.py ./ ./autograding_output/ "$MAX_SCORE"
+timeout "$TIMEOUT" python3 /opt/test-runner/bin/run.py "$TEST_DIR" ./autograding_output/ "$MAX_SCORE"
 exit_status=$?
 if [ $exit_status -eq 124 ]; then
   echo "The command took longer than $TIMEOUT seconds to execute. Please increase the timeout to avoid this error."

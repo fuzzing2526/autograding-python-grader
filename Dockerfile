@@ -8,6 +8,7 @@ RUN apt-get update \
  && apt-get install jq -y \
  && apt-get autoremove -y \
  && apt-get install coreutils -y \
+ && apt-get -q install -y graphviz graphviz-dev cmake pkg-config libcairo2-dev \
  && rm -rf /var/lib/apt/lists/*
 
 COPY . /opt/test-runner

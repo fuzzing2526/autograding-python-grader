@@ -140,7 +140,7 @@ class ResultsReporter:
             if test.is_passing():
                 test.score = self.results.max_score / len(self.tests)
             else:
-                test.score = 0 
+                test.score = 0
             self.results.add(test)
 
     def pytest_terminal_summary(self, terminalreporter):
@@ -204,10 +204,14 @@ def run(indir: Directory, outdir: Directory, max_score: int, args: List[str]) ->
     """
     test_files = []
 
-    for root, dirs, files in os.walk(indir):
-        for file in files:
-            if file.endswith("_test.py"):
-                test_files.append(Path(root) / file)
+    indir_path = Path(indir)
+    if indir_path.is_file():
+        test_files.append(indir_path)
+    else:
+        for root, dirs, files in os.walk(indir):
+            for file in files:
+                if file.endswith("_test.py"):
+                    test_files.append(Path(root) / file)
 
     out_file = outdir.joinpath("results.json")
 
