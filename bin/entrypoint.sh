@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 set -e
 
-WORKSPACE_UID=$(stat -c "%u" /github/workspace)
-WORKSPACE_GID=$(stat -c "%g" /github/workspace)
+WORKSPACE_UID=$(stat -c "%u" .)
+WORKSPACE_GID=$(stat -c "%g" .)
 
 if ! getent group runner >/dev/null 2>&1; then
   addgroup --gid "$WORKSPACE_GID" runner
