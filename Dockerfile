@@ -4,7 +4,7 @@ RUN apt-get update \
  && apt-get install jq -y \
  && apt-get autoremove -y \
  && apt-get install coreutils -y \
- && apt-get -q install -y graphviz graphviz-dev cmake pkg-config libcairo2-dev \
+ && apt-get -q install -y gosu graphviz graphviz-dev cmake pkg-config libcairo2-dev \
  && rm -rf /var/lib/apt/lists/*
 
 COPY requirements.txt /requirements.txt
@@ -15,4 +15,6 @@ COPY . /opt/test-runner
 
 WORKDIR /opt/test-runner
 
-ENTRYPOINT [ "/opt/test-runner/bin/run.sh" ]
+RUN chmod +x /entrypoint.sh
+
+ENTRYPOINT [ "/entrypoint.sh" ]
