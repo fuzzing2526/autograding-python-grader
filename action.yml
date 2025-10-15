@@ -9,6 +9,9 @@ inputs:
   max-score:
     description: "The maximum amount of points a student can receive for this test."
     required: false
+  test-dir:
+    description: "Directory containing the test files or a file. Defaults to the repository root."
+    required: false
   setup-command:
     description: "Command to execute prior to the test, typically for environment setup or dependency installation."
     required: false
@@ -23,3 +26,4 @@ runs:
     - "--timeout=${{ inputs.timeout }}"
     - "--max-score=${{ inputs.max-score }}"
     - "--setup-command=${{ inputs.setup-command }}"
+    - "--test-dir=${{ inputs.test-dir }}"
