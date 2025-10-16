@@ -1,4 +1,4 @@
-FROM python:3.12.12-slim
+FROM python:3.12-trixie
 
 RUN apt-get update \
  && apt-get install jq -y \
@@ -9,7 +9,7 @@ RUN apt-get update \
 
 COPY requirements.txt /requirements.txt
 
-RUN pip install -r /requirements.txt
+RUN pip install --no-cache-dir -r /requirements.txt
 
 COPY . /opt/test-runner
 
