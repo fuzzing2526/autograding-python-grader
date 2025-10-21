@@ -38,7 +38,7 @@ if [ -n "$SETUP_COMMAND" ]; then
   eval "$SETUP_COMMAND"
 fi
 
-timeout "$TIMEOUT" python3 /opt/test-runner/bin/run.py "$TEST_DIR" ./autograding_output/ "$MAX_SCORE"
+timeout "$TIMEOUT" python3 /opt/test-runner/bin/run.py "$TEST_DIR" ./autograding_output/ "$MAX_SCORE" --tb=no --no-summary
 exit_status=$?
 if [ $exit_status -eq 124 ]; then
   echo "The command took longer than $TIMEOUT seconds to execute. Please increase the timeout to avoid this error."
