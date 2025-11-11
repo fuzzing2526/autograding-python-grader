@@ -4,7 +4,6 @@ root="/opt/test-runner"
 export PYTHONPATH="$root:$PYTHONPATH"
 
 mkdir autograding_output
-rm -r autograding_output/*
 
 while [ $# -gt 0 ]; do
   case "$1" in
@@ -43,7 +42,7 @@ timeout "$TIMEOUT" python3 /opt/test-runner/bin/run.py "$TEST_DIR" ./autograding
 exit_status=$?
 if [ $exit_status -eq 124 ]; then
   echo "The command took longer than $TIMEOUT seconds to execute. Please increase the timeout to avoid this error."
-  echo "{\"version\":3,\"status\":\"fail\",\"tests\":[{\"name\":\"Test timed out. Check your logs\",\"status\":\"fail\",\"message\":\"timed out\",\"test_code\":\"timed out\",\"task_id\":0,\"filename\":\"tests/timedout\",\"line_no\":1,\"duration\":0.01,\"score\":0}],\"max_score\":$MAX_SCORE}" > autograding_output/results.jsonfi
+  echo '{"version": 3, "status": "fail", "tests": [{"name": "Timed out Check your logs", "status": "fail", "message": "timed out", "test_code": "timed out", "task_id": 0, "filename": "tests/timedout", "line_no": 1, "duration": 0.01, "score": 0}], "max_score": '"$MAX_SCORE"'}' > autograding_output/results.json
 fi
 
 echo "result=$(jq -c . autograding_output/results.json | jq -sRr @base64)" >> "$GITHUB_OUTPUT"
