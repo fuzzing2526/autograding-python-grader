@@ -4,6 +4,7 @@ root="/opt/test-runner"
 export PYTHONPATH="$root:$PYTHONPATH"
 
 mkdir autograding_output
+rm -r autograding_output/*
 
 while [ $# -gt 0 ]; do
   case "$1" in
