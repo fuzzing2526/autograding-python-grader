@@ -38,4 +38,6 @@ fi
 
 chown -R runner:runner /opt/test-runner || true
 
+export PATH="/home/runner/.local/bin:$PATH"
+
 exec gosu runner /opt/test-runner/bin/run.sh --timeout="$TIMEOUT" --max-score="$MAX_SCORE" --test-dir="$TEST_DIR" --setup-command="$SETUP_COMMAND"
